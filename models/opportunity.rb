@@ -8,13 +8,7 @@ class Opportunity < ActiveRecord::Base
   def self.categories
     categories = self.all.map do |opp|
       opp.category
-    end.uniq
-    puts "We found #{categories.length} categories for you to choose:"
-    categories.each_with_index do |category, i|
-      if category != nil
-        puts "#{i+1} #{category}"
-      end
-    end
+    end.uniq.compact
   end
 
   def self.find_by_category(user_category)

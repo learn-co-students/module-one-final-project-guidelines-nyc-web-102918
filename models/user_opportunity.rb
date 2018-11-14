@@ -1,4 +1,4 @@
-class Category < ActiveRecord::Base
+class UserOpportunity < ActiveRecord::Base
   belongs_to :user
   belongs_to :opportunity
 end

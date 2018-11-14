@@ -10,6 +10,8 @@ require_relative "../models/user_opportunity.rb"
 
 # seed_db(request(OPPS))
 welcome
+menu_options
+menu_selection
 
 binding.pry
 
