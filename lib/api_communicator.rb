@@ -2,7 +2,7 @@ require 'rest-client'
 require 'json'
 require 'pry'
 
-OPPS = "https://data.cityofnewyork.us/resource/n4ac-3636.json"
+OPPS = "https://data.cityofnewyork.us/resource/n4ac-3636.json?$$app_token=qYfR9xFPI5U6npXiQj0i9dmTf"
 
 def request(url)
   response_string = RestClient.get(url)
