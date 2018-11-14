@@ -1,3 +1,5 @@
+# User.last
+
 def welcome
   puts "Hi, welcome to NYC Volunteer Portal! Your one-stop-shop for all of your New York volunteer needs. To get started, please enter your name:"
   user_name = gets.chomp
@@ -13,22 +15,29 @@ def categories
   Opportunity.categories.each_with_index do |category, i|
     puts "#{i+1} #{category}"
   end
-
   input = gets.chomp.to_i
   Opportunity.find_by_category(Opportunity.categories[input - 1])
+end
+
+def save_to_list
+  puts "Please enter a number to save to your list"
+  input = gets.chomp.to_i
 end
 
 def menu_selection
   selection = gets.chomp.to_i
   if selection < 1 || selection > 3
-    "Sorry, that's an invalid option. Please try again."
+    puts "Sorry, that's an invalid option. Please try again."
   else
     if selection == 1
       categories
+
     elsif selection == 2
-      ""
+      puts "Please enter your zipcode."
+      input = gets.chomp.to_i
+      Opportunity.find_by_zipcode(input)
     else
-      ""
+      " "
     end
   end
 end
