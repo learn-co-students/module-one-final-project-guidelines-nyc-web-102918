@@ -16,7 +16,7 @@ def seed_db(response_array)
     opportunity = Opportunity.new
     opportunity.title = hash["title"]
     opportunity.organization = hash["org_title"]
-    opportunity.address = hash["locality"]
+    opportunity.address = "#{hash["locality_address"]}, #{hash["locality_city"]}, #{hash["locality_state"]} #{hash["locality_zip"]}"
     opportunity.zipcode = hash["postalcode"]
     opportunity.category = hash["category_desc"]
     opportunity.start_date = hash["start_date_date"]

@@ -1,4 +1,5 @@
 require 'bundler'
+Bundler.require
 require 'rake'
 require 'active_record'
 require 'yaml/store'
@@ -7,7 +8,7 @@ require 'date'
 require 'rest-client'
 require 'json'
 require 'pry'
-Bundler.require
+
 
 Dotenv.load
 
