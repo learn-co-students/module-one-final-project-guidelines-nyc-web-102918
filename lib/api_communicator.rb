@@ -10,6 +10,23 @@ def request(url)
   response_hash
 end
 
+def seed_db(response_array)
+  Opportunity.destroy_all
+  response_array.each do |hash|
+    opportunity = Opportunity.new
+    opportunity.title = hash["title"]
+    opportunity.organization = hash["org_title"]
+    opportunity.address = hash["locality"]
+    opportunity.zipcode = hash["postalcode"]
+    opportunity.category = hash["category_desc"]
+    opportunity.start_date = hash["start_date_date"]
+    opportunity.end_date = hash["end_date_date"]
+    opportunity.description = hash["summary"]
+    opportunity.url = hash["display_url"]
+    opportunity.save
+  end
+end
+
 
 
 # {"addresses_count"=>"1",
