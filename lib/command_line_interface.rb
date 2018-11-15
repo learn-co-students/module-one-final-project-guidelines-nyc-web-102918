@@ -1,7 +1,38 @@
 # User.last
+def graphics
+  puts" "
+  puts" '|.   '|' '||' '|'   ..|'''.| "
+  sleep(0.2)
+  puts"  |'|   |    || |   .|'     ' "
+  sleep(0.2)
+  puts"  | '|. |     ||    ||        "
+  sleep(0.2)
+  puts"  |   |||     ||    '|.      ."
+  sleep(0.2)
+  puts" .|.   '|    .||.    ''|....' "
+  sleep(0.2)
+  puts" "
+  sleep(0.2)
+  puts" "
+  sleep(0.2)
+  puts"  '||'  '|'         '||                      .                          "
+  sleep(0.2)
+  puts"   '|.  .'    ...    ||  ... ...  .. ...   .||.    ....    ....  ... .."
+  sleep(0.2)
+  puts"    ||  |   .|  '|.  ||   ||  ||   ||  ||   ||   .|...|| .|...||  ||' ''"
+  sleep(0.2)
+  puts"     |||    ||   ||  ||   ||  ||   ||  ||   ||   ||      ||       ||"
+  sleep(0.2)
+  puts"      |      '|..|' .||.  '|..'|. .||. ||.  '|.'  '|...'  '|...' .||.   "
+  sleep(0.2)
+  puts" "
+  sleep(0.2)
+  puts " "
+end
+
 
 def welcome
-  puts "Hi, welcome to NYC Volunteer Portal! Your one-stop-shop for all of your New York volunteer needs. To get started, please enter your name:"
+  puts "Hi, welcome to the NYC Volunteer Portal! Your one-stop-shop for all of your New York volunteer needs. To get started, please enter your name:"
   user_name = gets.chomp
   new_user = User.create(name: user_name)
 end
@@ -34,7 +65,7 @@ def menu_selection
         user_list = User.all.last.opportunities
         if user_list.length == 0
           puts "It looks like you haven't saved any volunteer opportunities yet!"
-          puts "To get personalized recommendations, please save a few opportunities that interest you."
+          puts "Please browse by category or location and save a few opportunities that interest you."
         else
           puts "Here are your saved results:"
           counter = 0
@@ -44,6 +75,7 @@ def menu_selection
         user_list = User.all.last.opportunities
         if user_list.length == 0
           puts "It looks like you haven't saved any volunteer opportunities yet!"
+          puts "To get personalized recommendations, please save a few opportunities that interest you."
         else
           user_categories = User.all.last.opportunities.map do |opp|
             opp.category
@@ -94,6 +126,7 @@ def goodbye
 end
 
 def menu_options
+  puts " "
   puts "Hi #{User.all.last.name}, please select from below:"
   puts " "
   # list of categories

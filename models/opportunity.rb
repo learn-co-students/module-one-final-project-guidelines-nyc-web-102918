@@ -19,17 +19,18 @@ class Opportunity < ActiveRecord::Base
     end
     if results.length == 0
       puts "Sorry, there are currently no opportunities in this area."
+      return 0
     elsif results.length > 10
       while counter < 10 do
         print_results(results, counter)
         counter += 1
-     end
-   else
+      end
+    else
      results.each do |result|
        print_results(results, counter)
        counter += 1
      end
-   end
+    end
    save_or_return(current_user, results)
   end
 

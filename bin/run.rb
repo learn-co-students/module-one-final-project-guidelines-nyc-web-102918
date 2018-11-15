@@ -9,6 +9,7 @@ require_relative "../models/user_opportunity.rb"
 
 
 # seed_db(request(OPPS))
+graphics
 welcome
 menu_options
 menu_selection
