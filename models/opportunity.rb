@@ -13,6 +13,7 @@ class Opportunity < ActiveRecord::Base
 
   def self.find_by_zipcode(zipcode)
     counter = 0
+    current_user = User.all.last
     results = Opportunity.all.select do |opp|
       opp.zipcode == zipcode
     end
@@ -48,12 +49,14 @@ class Opportunity < ActiveRecord::Base
    end
    puts "Enter a number to save to your list"
    input = gets.chomp.to_i
-   UserOpportunity.create(user: User.all.last, opportunity: results[input - 1])
-   puts "#{results[input - 1].title} has been saved!"
+   current_user.save_to_list(results[input - 1])
+   # UserOpportunity.create(user: User.all.last, opportunity: results[input - 1])
+   # puts "#{results[input - 1].title} has been saved!"
   end
 
   def self.find_by_category(user_category)
     counter = 0
+    current_user = User.all.last
     results = Opportunity.all.select do |opp|
       opp.category == user_category
     end
@@ -72,10 +75,18 @@ class Opportunity < ActiveRecord::Base
     end
     # Please enter 'Save' to save to your list, or 'Back' to return to the main menu_options
     # input = gets.chomp
-    puts "Enter a number to save to your list"
-    input = gets.chomp.to_i
-    UserOpportunity.create(user: User.all.last, opportunity: results[input - 1])
-    puts "#{results[input - 1].title} has been saved!"
+    puts "Please enter 'save' to save an item to your list, or 'back' to return to the main menu."
+    user_choice = gets.chomp.downcase
+    if user_choice == "save"
+      puts "Enter a number to save to your list"
+      input = gets.chomp.to_i
+      current_user.save_to_list(results[input - 1])
+    elsif user_choice == "back"
+      puts "Returning to the main menu."
+      sleep(1)
+    end
+    # UserOpportunity.create(user: User.all.last, opportunity: results[input - 1])
+    # puts "#{results[input - 1].title} has been saved!"
   end
 
 end

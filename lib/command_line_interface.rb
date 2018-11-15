@@ -3,10 +3,7 @@
 def welcome
   puts "Hi, welcome to NYC Volunteer Portal! Your one-stop-shop for all of your New York volunteer needs. To get started, please enter your name:"
   user_name = gets.chomp
-  # puts "What's your zip code?"
-  # user_zipcode = gets.chomp.to_i
   new_user = User.create(name: user_name)
-  # new_user
 end
 
 def categories
@@ -17,11 +14,6 @@ def categories
   end
   input = gets.chomp.to_i
   Opportunity.find_by_category(Opportunity.categories[input - 1])
-end
-
-def save_to_list
-  puts "Please enter a number to save to your list"
-  input = gets.chomp.to_i
 end
 
 def menu_selection
@@ -46,16 +38,21 @@ def menu_selection
           print_results(User.all.last.opportunities, counter)
         end
       elsif selection == 4
-        user_categories = User.all.last.opportunities.map do |opp|
-          opp.category
-        end.uniq.compact
-        recommendations = Opportunity.all.select do |opp|
-          user_categories.include?(opp.category)
-        end
-        counter = 0
-        while counter < 3
-          print_results(recommendations.sample(3), counter)
-          counter += 1
+        user_list = User.all.last.opportunities
+        if user_list.length == 0
+          puts "It looks like you haven't saved any volunteer opportunities yet!"
+        else
+          user_categories = User.all.last.opportunities.map do |opp|
+            opp.category
+          end.uniq.compact
+          recommendations = Opportunity.all.select do |opp|
+            user_categories.include?(opp.category)
+          end
+          counter = 0
+          while counter < 3
+            print_results(recommendations.sample(3), counter)
+            counter += 1
+          end
         end
       end
       menu_options
@@ -74,6 +71,10 @@ def print_results(results, counter)
   puts "******************"
   puts " "
   sleep(0.5)
+end
+
+def goodbye
+  puts "Thanks for using the NYC Volunteer Portal! Goodbye."
 end
 
 def menu_options

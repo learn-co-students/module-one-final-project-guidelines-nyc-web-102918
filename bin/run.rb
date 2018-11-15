@@ -12,6 +12,7 @@ require_relative "../models/user_opportunity.rb"
 welcome
 menu_options
 menu_selection
+goodbye
 
 binding.pry
 
