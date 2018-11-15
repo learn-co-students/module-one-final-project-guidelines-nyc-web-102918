@@ -26,20 +26,54 @@ end
 
 def menu_selection
   selection = gets.chomp.to_i
-  if selection < 1 || selection > 3
-    puts "Sorry, that's an invalid option. Please try again."
-  else
-    if selection == 1
-      categories
-
-    elsif selection == 2
-      puts "Please enter your zipcode."
-      input = gets.chomp.to_i
-      Opportunity.find_by_zipcode(input)
+  while selection != 5
+    if selection < 1 || selection > 5
+      puts "Sorry, that's an invalid option. Please try again."
     else
-      " "
+      if selection == 1
+        categories
+      elsif selection == 2
+        puts "Please enter your zipcode."
+        input = gets.chomp.to_i
+        Opportunity.find_by_zipcode(input)
+      elsif selection == 3
+        user_list = User.all.last.opportunities
+        if user_list.length == 0
+          puts "It looks like you haven't saved any volunteer opportunities yet!"
+        else
+          puts "Here are your saved results:"
+          counter = 0
+          print_results(User.all.last.opportunities, counter)
+        end
+      elsif selection == 4
+        user_categories = User.all.last.opportunities.map do |opp|
+          opp.category
+        end.uniq.compact
+        recommendations = Opportunity.all.select do |opp|
+          user_categories.include?(opp.category)
+        end
+        counter = 0
+        while counter < 3
+          print_results(recommendations.sample(3), counter)
+          counter += 1
+        end
+      end
+      menu_options
+      selection = gets.chomp.to_i
     end
   end
+end
+
+def print_results(results, counter)
+  puts " "
+  puts "[#{counter + 1}]"
+  puts "TITLE: " + results[counter].title
+  puts "ORG: " + results[counter].organization
+  puts "DESCRIPTION: " + results[counter].description
+  puts " "
+  puts "******************"
+  puts " "
+  sleep(0.5)
 end
 
 def menu_options
@@ -49,8 +83,10 @@ def menu_options
   puts "[1] View categories"
   # search by zipcode
   puts "[2] Search by zip code"
-
   # see saved list
   puts "[3] View saved list"
-
+  # find similar volunteer opportunities (to ones they've saved)
+  puts "[4] Recommended for me"
+  # exit the program
+  puts "[5] Exit"
 end
