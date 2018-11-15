@@ -61,6 +61,19 @@ def menu_selection
   end
 end
 
+def save_or_return(user, results)
+  puts "Please enter 'save' to save an item to your list, or 'back' to return to the main menu."
+  user_choice = gets.chomp.downcase
+  if user_choice == "save"
+    puts "Enter a number to save to your list"
+    input = gets.chomp.to_i
+    user.save_to_list(results[input - 1])
+  elsif user_choice == "back"
+    puts "Returning to the main menu."
+    sleep(1)
+  end
+end
+
 def print_results(results, counter)
   puts " "
   puts "[#{counter + 1}]"
@@ -78,7 +91,7 @@ def goodbye
 end
 
 def menu_options
-  puts "Hey #{User.all.last.name}, please select from below:"
+  puts "Hi #{User.all.last.name}, please select from below:"
   puts " "
   # list of categories
   puts "[1] View categories"

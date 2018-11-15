@@ -5,5 +5,8 @@ class User < ActiveRecord::Base
   def save_to_list(opportunity)
     self.opportunities << opportunity
     puts "#{opportunity.title} has been saved!"
+    sleep(0.25)
+    puts "Returning to the main menu."
+    sleep(1)
   end
 end
