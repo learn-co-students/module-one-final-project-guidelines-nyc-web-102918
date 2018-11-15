@@ -21,6 +21,8 @@ def menu_selection
   while selection != 5
     if selection < 1 || selection > 5
       puts "Sorry, that's an invalid option. Please try again."
+      menu_options
+      selection = gets.chomp.to_i
     else
       if selection == 1
         categories
@@ -32,6 +34,7 @@ def menu_selection
         user_list = User.all.last.opportunities
         if user_list.length == 0
           puts "It looks like you haven't saved any volunteer opportunities yet!"
+          puts "To get personalized recommendations, please save a few opportunities that interest you."
         else
           puts "Here are your saved results:"
           counter = 0

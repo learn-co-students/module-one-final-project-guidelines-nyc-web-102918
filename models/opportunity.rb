@@ -22,37 +22,15 @@ class Opportunity < ActiveRecord::Base
     elsif results.length > 10
       while counter < 10 do
         print_results(results, counter)
-        # puts " "
-        # puts "[#{counter + 1}]"
-        # puts "TITLE: " + results[counter].title
-        # puts "ORG: " + results[counter].organization
-        # puts "DESCRIPTION: " + results[counter].description
-        # puts " "
-        # puts "******************"
-        # puts " "
         counter += 1
      end
    else
      results.each do |result|
        print_results(results, counter)
-       # puts " "
-       # puts "[#{counter + 1}]"
-       # puts "TITLE: " + results[counter].title
-       # puts "ORG: " + results[counter].organization
-       # puts "DESCRIPTION: " + results[counter].description
-       # puts " "
-       # puts "******************"
-       # puts " "
        counter += 1
-       # sleep(0.5)
      end
    end
    save_or_return(current_user, results)
-   # puts "Enter a number to save to your list"
-   # input = gets.chomp.to_i
-   # current_user.save_to_list(results[input - 1])
-   # UserOpportunity.create(user: User.all.last, opportunity: results[input - 1])
-   # puts "#{results[input - 1].title} has been saved!"
   end
 
   def self.find_by_category(user_category)
@@ -63,32 +41,9 @@ class Opportunity < ActiveRecord::Base
     end
     while counter < 10 do
       print_results(results, counter)
-      # puts " "
-      # puts "[#{counter + 1}]"
-      # puts "TITLE: " + results[counter].title
-      # puts "ORG: " + results[counter].organization
-      # puts "DESCRIPTION: " + results[counter].description
-      # puts " "
-      # puts "******************"
-      # puts " "
       counter += 1
-      # sleep(0.5)
     end
-    # Please enter 'Save' to save to your list, or 'Back' to return to the main menu_options
-    # input = gets.chomp
     save_or_return(current_user, results)
-    # puts "Please enter 'save' to save an item to your list, or 'back' to return to the main menu."
-    # user_choice = gets.chomp.downcase
-    # if user_choice == "save"
-    #   puts "Enter a number to save to your list"
-    #   input = gets.chomp.to_i
-    #   current_user.save_to_list(results[input - 1])
-    # elsif user_choice == "back"
-    #   puts "Returning to the main menu."
-    #   sleep(1)
-    # end
-    # UserOpportunity.create(user: User.all.last, opportunity: results[input - 1])
-    # puts "#{results[input - 1].title} has been saved!"
   end
 
 end
