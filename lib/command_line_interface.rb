@@ -86,11 +86,13 @@ def menu_selection
           recommendations = Opportunity.all.select do |opp|
             user_categories.include?(opp.category)
           end
+          pick_three_recs = recommendations.sample(3)
           counter = 0
           while counter < 3
-            print_results(recommendations.sample(3), counter)
+            print_results(pick_three_recs, counter)
             counter += 1
           end
+          save_or_return(User.all.last, pick_three_recs)
         end
       end
       menu_options
