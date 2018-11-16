@@ -69,7 +69,10 @@ def menu_selection
         else
           puts "Here are your saved results:"
           counter = 0
-          print_results(User.all.last.opportunities, counter)
+          while counter < User.all.last.opportunities.length
+            print_results(User.all.last.opportunities, counter)
+            counter += 1
+          end
         end
       elsif selection == 4
         user_list = User.all.last.opportunities
@@ -106,6 +109,9 @@ def save_or_return(user, results)
   elsif user_choice == "back"
     puts "Returning to the main menu."
     sleep(1)
+  else
+    puts "Sorry, that's an invalid option."
+    save_or_return(user, results)
   end
 end
 

@@ -14,7 +14,3 @@ welcome
 menu_options
 menu_selection
 goodbye
-
-binding.pry
-
-0
